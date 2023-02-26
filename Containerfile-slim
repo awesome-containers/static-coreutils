@@ -2,7 +2,7 @@
 ARG STATIC_BASH_VERSION=5.2.15
 ARG STATIC_COREUTILS_VERSION=9.1
 
-FROM ghcr.io/awesome-containers/static-coreutils:$STATIC_BASH_VERSION AS static-coreutils
+FROM ghcr.io/awesome-containers/static-coreutils:$STATIC_COREUTILS_VERSION AS static-coreutils
 
 FROM ghcr.io/awesome-containers/alpine-build-essential:3.17 AS build
 
