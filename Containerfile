@@ -19,13 +19,14 @@ ARG LDFLAGS='-Wl,--gc-sections'
 RUN set -eux; \
     ./bootstrap --skip-po; \
     ./configure; \
-    make -j$(nproc); \
+    make -j"$(nproc)"; \
     # make distcheck; \
     # make check; \
     mkdir bin; \
     for bin in $(find ./src/ -executable -type f); do \
         file "$bin" -b --mime-type | grep -qw 'application/x-executable' || \
             continue; \
+        ! ldd "$bin" && :; \
         mv "$bin" bin/; \
     done; \
     # rm 'bin/[' bin/echo bin/false bin/printf bin/pwd bin/test bin/true; \
