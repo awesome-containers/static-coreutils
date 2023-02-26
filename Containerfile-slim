@@ -1,0 +1,22 @@
+# https://github.com/awesome-containers/static-bash
+ARG STATIC_BASH_VERSION=5.2.15
+ARG STATIC_COREUTILS_VERSION=9.1
+
+FROM ghcr.io/awesome-containers/static-coreutils:$STATIC_BASH_VERSION AS static-coreutils
+
+FROM ghcr.io/awesome-containers/alpine-build-essential:3.17 AS build
+
+WORKDIR /src/coreutils
+COPY --from=static-coreutils /bin/ ./
+
+RUN set -xeu; \
+    rm -f bash; \
+    strip -s -R .comment -R .gnu.version --strip-unneeded ./*; \
+    upx --no-progress --no-color ./*; \
+    upx -t --no-progress --no-color ./*; \
+    chmod -cR 755 ./; \
+    chown -cR 0:0 ./
+
+# slim static coreutils image
+FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION-slim AS static-bash
+COPY --from=build /src/coreutils/ /bin/
