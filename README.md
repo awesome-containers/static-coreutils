@@ -1,6 +1,6 @@
 # Statically linked Coreutils
 
-Statically linked Coreutils 9.1 container image with Bash 5.2
+Statically linked **Coreutils** container image with [Bash]
 
 > 59M
 
@@ -12,7 +12,7 @@ docker.io/awesomecontainers/static-coreutils:latest
 docker.io/awesomecontainers/static-coreutils:9.1
 ```
 
-Slim statically linked Coreutils 9.1 container image with Bash 5.2
+Slim statically linked **Coreutils** container image with [Bash] stripped and
 packaged with UPX
 
 > 5.4M
@@ -27,4 +27,6 @@ docker.io/awesomecontainers/static-coreutils:9.1-slim
 
 * <https://www.gnu.org/software/coreutils/>
 * <http://git.savannah.gnu.org/cgit/coreutils.git>
-* <https://github.com/awesome-containers/static-bash>
+
+[Bash]: https://github.com/awesome-containers/static-bash
+[UPX]: https://upx.github.io/
