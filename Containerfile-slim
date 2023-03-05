@@ -1,22 +1,32 @@
 # https://github.com/awesome-containers/static-bash
 ARG STATIC_BASH_VERSION=5.2.15
+ARG STATIC_BASH_IMAGE=ghcr.io/awesome-containers/static-bash
+
+# https://github.com/awesome-containers/static-coreutils
 ARG STATIC_COREUTILS_VERSION=9.1
+ARG STATIC_COREUTILS_IMAGE=ghcr.io/awesome-containers/static-coreutils
 
-FROM ghcr.io/awesome-containers/static-coreutils:$STATIC_COREUTILS_VERSION AS static-coreutils
+# https://github.com/awesome-containers/alpine-build-essential
+ARG BUILD_ESSENTIAL_VERSION=3.17
+ARG BUILD_ESSENTIAL_IMAGE=ghcr.io/awesome-containers/alpine-build-essential
 
-FROM ghcr.io/awesome-containers/alpine-build-essential:3.17 AS build
+
+FROM $STATIC_BASH_IMAGE:$STATIC_BASH_VERSION-slim AS static-bash
+FROM $STATIC_COREUTILS_IMAGE:$STATIC_COREUTILS_VERSION AS static-coreutils
+FROM $BUILD_ESSENTIAL_IMAGE:$BUILD_ESSENTIAL_VERSION AS build
 
 WORKDIR /src/coreutils
 COPY --from=static-coreutils /bin/ ./
 
 RUN set -xeu; \
     rm -f bash; \
-    strip -s -R .comment -R .gnu.version --strip-unneeded ./*; \
+    rm -f '[' echo false printf pwd test true; \
     upx --no-progress --no-color ./*; \
     upx -t --no-progress --no-color ./*; \
     chmod -cR 755 ./; \
     chown -cR 0:0 ./
 
 # slim static coreutils image
-FROM ghcr.io/awesome-containers/static-bash:$STATIC_BASH_VERSION-slim AS static-bash
+FROM static-bash
+COPY --from=static-coreutils /etc/passwd /etc/group /etc/
 COPY --from=build /src/coreutils/ /bin/
