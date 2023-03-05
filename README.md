@@ -2,7 +2,7 @@
 
 Statically linked [Coreutils] container image with [Bash]
 
-> ~ 13M
+> ~ 9,5M (1,1M bash)
 
 ```bash
 ghcr.io/awesome-containers/static-coreutils:latest
@@ -18,7 +18,7 @@ packaged with [UPX]
 Also removed `[`, `echo`, `false`, `printf`, `pwd`, `test` and `true`
 because bash has them
 
-> ~ 5M
+> ~ 5M (578K bash)
 
 ```bash
 ghcr.io/awesome-containers/static-coreutils:latest-slim
