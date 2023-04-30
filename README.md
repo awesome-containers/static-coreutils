@@ -6,10 +6,10 @@ Statically linked [Coreutils] container image with [Bash]
 
 ```bash
 ghcr.io/awesome-containers/static-coreutils:latest
-ghcr.io/awesome-containers/static-coreutils:9.2
+ghcr.io/awesome-containers/static-coreutils:9.3
 
 docker.io/awesomecontainers/static-coreutils:latest
-docker.io/awesomecontainers/static-coreutils:9.2
+docker.io/awesomecontainers/static-coreutils:9.3
 ```
 
 Slim statically linked [Coreutils] container image with [Bash]
@@ -22,10 +22,10 @@ because bash has them
 
 ```bash
 ghcr.io/awesome-containers/static-coreutils:latest-slim
-ghcr.io/awesome-containers/static-coreutils:9.2-slim
+ghcr.io/awesome-containers/static-coreutils:9.3-slim
 
 docker.io/awesomecontainers/static-coreutils:latest-slim
-docker.io/awesomecontainers/static-coreutils:9.2-slim
+docker.io/awesomecontainers/static-coreutils:9.3-slim
 ```
 
 [Coreutils]: https://www.gnu.org/software/coreutils/
