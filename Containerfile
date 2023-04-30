@@ -38,6 +38,8 @@ RUN set -eux; \
         mv "$bin" bin/; \
     done; \
     # rm 'bin/[' bin/echo bin/false bin/printf bin/pwd bin/test bin/true; \
+    rm -f bin/make-prime-list; \
+    mv bin/ginstall bin/install; \
     chmod -cR 755 bin; \
     chown -cR 0:0 bin; \
     ./bin/cp --version; \
